@@ -1,0 +1,27 @@
+{% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+    <h2>Edit entry</h2>
+{% endblock page_header %}
+
+{% block content %}
+<div class="card mb-3">
+    <h4 class="card-header">
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        <small>
+            {{entry.date_added|date:'M d, Y H:i'}}
+        </small>
+    </h4>
+    <div class="card-body">
+        <form action = "{% url 'learning_logs:edit_entry' entry.id %}" method='post'>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button button_type="submit" content="Save changes" %}
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock content %}
